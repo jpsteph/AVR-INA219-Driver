@@ -5,6 +5,7 @@
  *  Author: jpsteph
  */ 
 
+#include <stdint.h>
 
 #ifndef I2C_H_
 #define I2C_H_
@@ -24,9 +25,5 @@ uint8_t TWIReadACK(void);
 uint8_t TWIReadNACK(void);
 
 uint8_t TWIGetStatus(void);
-
-void writeINA(uint8_t adr, uint8_t reg, uint16_t u16data);
-
-uint16_t readINA(uint8_t adr, uint8_t reg);
 
 #endif /* I2C_H_ */

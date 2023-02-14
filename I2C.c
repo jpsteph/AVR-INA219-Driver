@@ -63,6 +63,7 @@ uint8_t TWIReadNACK(void) {
 	return TWDR;
 }
 
+//currently unused
 uint8_t TWIGetStatus(void) {
 	uint8_t status;
 	//mask status
@@ -70,29 +71,3 @@ uint8_t TWIGetStatus(void) {
 	return status;
 }
 
-void writeINA(uint8_t adr, uint8_t reg, uint16_t u16data) {
-	TWIStart();
-	TWIWrite(adr);
-	TWIWrite(reg);
-	TWIWrite((uint8_t) (u16data >> 8));
-	TWIWrite((uint8_t) u16data | 0xff);
-	TWIStop();
-}
-
-uint16_t readINA(uint8_t adr, uint8_t reg) {
-	uint16_t result;
-	TWIStart();
-	//setting read pointer to register
-	TWIWrite(adr);
-	TWIWrite(reg);
-	TWIStop();
-	
-	TWIStart();
-	//starting read
-	TWIWrite(adr | 0x01);
-	result = ((uint16_t) TWIReadACK()) << 8;
-	result = ((uint16_t) TWIReadNACK()) | result;
-	TWIStop();
-	
-	return result;
-}
